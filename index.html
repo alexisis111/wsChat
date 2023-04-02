@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>чат socket.io</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-200">
+<h1 class="text-2xl font-bold text-center my-4">Добро пожаловать в Chat</h1>
+<div class="flex justify-center">
+    <div class="bg-white rounded-lg shadow-lg w-3/4 py-4 px-6">
+        <ul id="messages" class="mt-4">
+        </ul>
+        <form id="message-form" class="flex justify-center mt-4">
+            <input type="text" name="message" placeholder="Type your message..."
+                   class="py-2 px-3 border border-gray-400 rounded-l-md w-4/5">
+            <button class="py-2 px-4 bg-blue-500 text-white font-semibold rounded-r-md w-1/5">Send</button>
+        </form>
+    </div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+    const messageForm = document.getElementById('message-form');
+    const messageInput = document.querySelector('input[name=message]');
+    const messages = document.getElementById('messages');
+
+
+    messageForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const message = messageInput.value;
+        socket.emit('chat message', message);
+        messageInput.value = '';
+    });
+
+    socket.on('chat message', (msg) => {
+        const li = document.createElement('li');
+        li.textContent = `${msg.id}: ${msg.text}`;
+        messages.appendChild(li);
+        document.getElementById('user-id').textContent = `Your id: ${msg.id}`;
+    });
+
+    socket.on('chat history', (msgs) => {
+        msgs.forEach((msg) => {
+            const li = document.createElement('li');
+            li.textContent = `${msg.id}: ${msg.text}`;
+            li.classList.add("bg-gray-100", "py-2", "px-4", "my-2", "rounded-lg");
+            messages.appendChild(li);
+        });
+    });
+</script>
+</body>
+</html>

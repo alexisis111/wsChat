@@ -1,0 +1,5 @@
+{"id":"4301215f-0567-44d8-b0f6-c75624f31eda","text":"привет"}
+{"id":"c7c11aaf-3066-49c7-b5a9-c575e1385304","text":"привет"}
+{"id":"ed0ebc0f-145a-42a9-84df-367dcb2868a6","text":"ult xnj rfrr"}
+{"id":"7ad62bcb-e204-49ce-85ef-8ada1a0efb89","text":"арвт"}
+{"id":"cdd8e25c-2ad6-4571-8000-068b5c85d707","text":""}
